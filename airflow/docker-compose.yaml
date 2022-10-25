@@ -62,21 +62,21 @@ services:
     <<: *airflow-common
     command: webserver
     ports:
-      - 8080:8080
+      - 8085:8085
     healthcheck:
       test:
         [
           "CMD",
           "curl",
           "--fail",
-          "http://localhost:8080/health"
+          "http://localhost:8085/health"
         ]
       interval: 10s
       timeout: 10s
       retries: 5
     restart: always
     env_file:
-      - ./var/set_env.env
+      - ./airflow/var/set_env.env
     depends_on:
       <<: *airflow-common-depends-on
       airflow-init:
@@ -96,7 +96,7 @@ services:
       retries: 5
     restart: always
     env_file:
-      - ./var/set_env.env
+      - ./airflow/var/set_env.env
     depends_on:
       <<: *airflow-common-depends-on
       airflow-init:

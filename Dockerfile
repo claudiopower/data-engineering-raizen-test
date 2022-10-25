@@ -7,6 +7,7 @@ RUN apt-get update && apt-get install -y \
 
 USER airflow
 COPY ./requirements.txt ./
+COPY ./airflow/dags/*.py ./airflow/dags
 RUN pip install --upgrade pip \
     && pip install --upgrade setuptools \
     && pip install --user --no-cache-dir -r requirements.txt

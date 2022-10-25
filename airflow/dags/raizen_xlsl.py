@@ -82,12 +82,12 @@ def gera_parquet(xls_convertido, sheet, features, values, dest_path, dest_filena
 
 def convert_xls_libre(path: str, out_dir: str) -> None:
 
-    logging.info("Converting the file")
+    logging.info("executa linha de comando libreoffice")
     makedirs(out_dir, exist_ok=True)
     linha_command = f"libreoffice --headless --convert-to xls --outdir {out_dir} {path}"
     process = subprocess.Popen(linha_command.split(), stdout=subprocess.PIPE)
-    output, error = process.communicate()
-    if error:
+    output, error_conv = process.communicate()
+    if error_conv:
         logging.error(f"Erro convertendo file {path}")
         raise
     logging.info(f"Gerado arquivo convertido {path}")
@@ -98,8 +98,8 @@ def salva_file(file: bytes, target_file: str):
     try:
          with open(target_file, "wb") as f:
             f.write(file)
-    except Exception as e:
-        logging.error(f"Error writing file - {e}")
+    except Exception as teste_w:
+        logging.error(f"erro ao gravar arquivo do xls carregado - {teste_w}")
         raise
 
 
